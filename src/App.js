@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
-import './Test';
+import './MyDropzone';
 import pyodideloader from "./pyodide";
-import Test from "./Test";
+import MyDropzone from "./MyDropzone";
 
 
 function App() {
@@ -21,24 +21,12 @@ function App() {
       <header className="App-header">
         { pyodide && (
             <>
-            <h1>PYODIDE AVAILABLE</h1>
-            <p>{pyodide.runPython("'Hello World from PYTHON'")}.</p>
+              <MyDropzone pyodide={pyodide}/>
             </>
         )}
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <Test/>
-        <Test/>
-        <Test/>
+        { !pyodide && (
+            <div>Loading Python...</div>
+        )}
       </header>
     </div>
   );
