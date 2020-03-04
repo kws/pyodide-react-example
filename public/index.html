@@ -29,9 +29,13 @@
   </head>
   <body>
   <script>
-    window.onload = function() {
-      window.registerPyodide(pyodide);
-    };
+    languagePluginLoader.then(() => {
+      console.log('Python ready');
+      window.pyodide = pyodide;
+      if (window.registerPyodide) {
+        window.registerPyodide(pyodide);
+      }
+    });
   </script>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
