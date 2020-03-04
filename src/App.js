@@ -1,21 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
+import './Test';
+import pyodideloader from "./pyodide";
+import Test from "./Test";
+
 
 function App() {
   const [pyodide, setPyodide] = useState();
 
-  const registerPyodide = async pyodide => {
-    console.log("Registering pyodide in React", Object.keys(pyodide));
-    setPyodide(pyodide);
-  };
-
   useEffect(() => {
-    window.registerPyodide = registerPyodide;
-    if (window.pyodide) {
-      setPyodide(pyodide);
-    }
-  }, [pyodide]);
-
+    pyodideloader().then((p) => {
+      setPyodide(p);
+    }).catch((e) => {
+      console.log("OH NO");
+    });
+  });
 
   return (
     <div className="App">
@@ -37,6 +36,9 @@ function App() {
         >
           Learn React
         </a>
+        <Test/>
+        <Test/>
+        <Test/>
       </header>
     </div>
   );
